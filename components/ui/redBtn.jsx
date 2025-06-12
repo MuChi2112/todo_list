@@ -5,7 +5,7 @@ const styles = {
     cursor: 'pointer',
     top: '503px',
     left: '43px',
-    width: '60px',
+    width: '90px',
     height: '32px',
     padding: '0px 8px',
     border: '0',

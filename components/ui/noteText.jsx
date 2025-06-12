@@ -1,26 +1,23 @@
 import React from 'react';
+import { Text as RNText, StyleSheet } from 'react-native';
 
-const styles = {
-  Text: {
-    color: '#333333',
-    fontSize: '14px',
-    fontFamily: 'Roboto Condensed',
-    fontWeight: 300,
-    lineHeight: '20px',
-    textAlign: 'center',
-  },
-};
-
-const defaultProps = {
-  text: 'No items. Press ‘Add’ to add tasks.',
-};
-
-const Text = (props) => {
+const NoteText = ({ children }) => {
   return (
-    <div style={styles.Text}>
-      {props.text ?? defaultProps.text}
-    </div>
+    <RNText style={styles.text}>
+      {children ?? 'No items. Press ‘Add’ to add tasks.'}
+    </RNText>
   );
 };
 
-export default Text;
+const styles = StyleSheet.create({
+  text: {
+    color: '#333333',
+    fontSize: 14,
+    fontFamily: 'Roboto Condensed',
+    fontWeight: '300',
+    lineHeight: 20,
+    textAlign: 'center',
+  },
+});
+
+export default NoteText;

@@ -1,45 +1,53 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-import Screen from './Screen';
-
-import cardImage from '../../assets/images/Card.png';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import blueBtn from '@/components/ui/blueBtn';
-import redBtn from '@/components/ui/redBtn';
-import inputBox from '@/components/ui/inputBox';
-import noteText from '@/components/ui/noteText';
-import text from '@/components/ui/text';
-import textForTextBox from '@/components/ui/textForTextBox';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import Background from '@/components/ui/Background';
-
+import cardImage from '../../assets/images/Card.png';
+import todoImage from '../../assets/images/todo.png';
 
 export default function HomeScreen() {
   return (
-    <Background><h1>hello world</h1>
-    <img src='../../assets/images/Card.png' alt="Card" />
+    <Background style={{ flex: 1 }}> {/* 💡 確保填滿畫面 */}
+      <View style={styles.container}>
+        <View style={styles.centeredContainer}>
+          <Image source={todoImage} style={styles.icon} />
+          <Text style={styles.title}>TaskMaster</Text>
+        </View>
+
+        <Image source={cardImage} style={styles.circleImage} />
+      </View>
     </Background>
   );
 }
 
+
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1, // 💡 使用 flex 撐滿畫面
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
+    height: '100vh'
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  centeredContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 32,
+    flexDirection: 'row',
+    gap: 10,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  icon: {
+    width: 50,
+    height: 50,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginTop: 12,
+  },
+  circleImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: 'orange',
   },
 });

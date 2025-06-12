@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import Background from '@/components/ui/Background';
 import BlueBtn from '@/components/ui/blueBtn';
+import RedBtn from '@/components/ui/redBtn';
 import NoteText from '@/components/ui/noteText';
 import Tab from '@/components/ui/Tab';
 
@@ -21,10 +22,18 @@ export default function HomeScreen() {
           </NoteText>
         </View>
 
+        <View style={styles.buttonRow}>
+          <RedBtn></RedBtn>
+          <BlueBtn>Edit</BlueBtn>
+          <BlueBtn>Complete</BlueBtn>
+        </View>
+
         <View style={styles.buttonContainer}>
           <BlueBtn>ADD</BlueBtn>
         </View>
       </View>
+
+      
     </Background>
   );
 }
@@ -55,5 +64,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     paddingBottom: 24,
     alignItems: 'center',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 80,
+    marginBottom: '50px'
   },
 });
