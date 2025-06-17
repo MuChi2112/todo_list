@@ -1,11 +1,11 @@
-import React from 'react';
 import { TextInput, StyleSheet } from 'react-native';
 
-const InputBox = ({ text = 'Enter task title', style = {}, ...rest }) => {
+const InputBox = ({ text = 'Enter task title', style = {}, onChangeData, ...rest }) => {
   return (
     <TextInput
       placeholder={text}
-      style={[styles.input, style]} // ✅ 合併樣式
+      style={[styles.input, style]} 
+      onChangeText={onChangeData} 
       {...rest}
     />
   );

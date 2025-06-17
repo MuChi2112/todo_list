@@ -3,17 +3,43 @@ import { StyleSheet, View, ScrollView, Button } from 'react-native';
 import Background from '@/components/ui/Background';
 import NoteText from '@/components/ui/noteText';
 import InputBox from '@/components/ui/inputBox';
+import {useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import todoImage from '../../assets/images/todo.png';
 
 export default function HomeScreen() {
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [deadline, setDeadline] = useState("");
+
   const handleCancel = () => {
     console.log('Cancelled');
   };
 
-  const handleAddTask = () => {
-    console.log('Task added');
-  };
+  const handleAddTask = async() => {
+    const newTask = {
+      title,
+      description,
+      deadline,
+      createdAt: new Date().toISOString(),
+    
+  }
+
+  try{
+    const existingTasksJSON = await AsyncStorage.getItem('tasks');
+    const existingTasks = existingTasksJSON?JSON.parse(existingTasksJSON) :[];
+
+    const updatedTasks = [...existingTasks, newTask];
+
+    await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
+
+    console.log('Task added:', newTask);
+  }catch (error){
+    console.error('Error saving task:', error);
+  }
+};
 
   return (
     <Background style={{ flex: 1 }}>
@@ -29,7 +55,7 @@ export default function HomeScreen() {
           {/* Title */}
           <View style={styles.field} >
             <NoteText style={styles.label}>TITLE</NoteText>
-            <InputBox placeholder="Enter task title" />
+            <InputBox placeholder="Enter task title" onChangeData = {setTitle} />
           </View>
 
           {/* Description */}
@@ -39,14 +65,13 @@ export default function HomeScreen() {
               placeholder="Enter task description"
               multiline
               numberOfLines={4}
-              style={[styles.textarea, { height: 140, textAlignVertical: 'top' }]}
-            />
+              style={[styles.textarea, { height: 140, textAlignVertical: 'top' }]} onChangeData = {setDescription}/>
           </View>
 
           {/* Deadline */}
           <View style={styles.field}>
             <NoteText style={styles.label}>DEADLINE</NoteText>
-            <InputBox placeholder="Enter deadline" />
+            <InputBox placeholder="Enter deadline" onChangeData = {setDeadline}/>
           </View>
 
           {/* Buttons */}
